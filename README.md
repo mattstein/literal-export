@@ -1,6 +1,6 @@
 # Literal Export CLI Utility
 
-This uses the Literal GraphQL API to export more details than the account CSV.
+This uses the [Literal](https://literal.club) [GraphQL API](https://literal.club/pages/api) to export more details than the account CSV.
 
 It prompts for your account email address and password in order to get a GraphQL token and make subsequent queries. (These credentials are not stored!)
 
