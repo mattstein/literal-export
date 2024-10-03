@@ -1,34 +1,48 @@
-<p align="center">
-    <img title="Laravel Zero" height="100" src="https://raw.githubusercontent.com/laravel-zero/docs/master/images/logo/laravel-zero-readme.png" alt="Laravel Zero Logo" />
-</p>
+# Literal Export CLI Utility
 
-<p align="center">
-  <a href="https://github.com/laravel-zero/framework/actions"><img src="https://github.com/laravel-zero/laravel-zero/actions/workflows/tests.yml/badge.svg" alt="Build Status" /></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/dt/laravel-zero/framework.svg" alt="Total Downloads" /></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/v/laravel-zero/framework.svg?label=stable" alt="Latest Stable Version" /></a>
-  <a href="https://packagist.org/packages/laravel-zero/framework"><img src="https://img.shields.io/packagist/l/laravel-zero/framework.svg" alt="License" /></a>
-</p>
+This uses the Literal GraphQL API to export more details than the account CSV.
 
-Laravel Zero was created by [Nuno Maduro](https://github.com/nunomaduro) and [Owen Voke](https://github.com/owenvoke), and is a micro-framework that provides an elegant starting point for your console application. It is an **unofficial** and customized version of Laravel optimized for building command-line applications.
+It prompts for your account email address and password in order to get a GraphQL token and make subsequent queries. (These credentials are not stored!)
 
-- Built on top of the [Laravel](https://laravel.com) components.
-- Optional installation of Laravel [Eloquent](https://laravel-zero.com/docs/database/), Laravel [Logging](https://laravel-zero.com/docs/logging/) and many others.
-- Supports interactive [menus](https://laravel-zero.com/docs/build-interactive-menus/) and [desktop notifications](https://laravel-zero.com/docs/send-desktop-notifications/) on Linux, Windows & MacOS.
-- Ships with a [Scheduler](https://laravel-zero.com/docs/task-scheduling/) and  a [Standalone Compiler](https://laravel-zero.com/docs/build-a-standalone-application/).
-- Integration with [Collision](https://github.com/nunomaduro/collision) - Beautiful error reporting
+```
+❯ php literal-export
 
-------
+ Account email address:
+ > hi@example.foo
 
-## Documentation
+ Account password:
+ >
 
-For full documentation, visit [laravel-zero.com](https://laravel-zero.com/).
+Logging in...
+Fetching reading states...
+Fetching book data...
+Compiling book information...
+ 220/220 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+Writing JSON...
+Done.
+```
 
-## Support the development
-**Do you like this project? Support it by donating**
+The slow part is where each book is queried for its reading start and end dates, which get folded into the resulting information.
 
-- PayPal: [Donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L)
-- Patreon: [Donate](https://www.patreon.com/nunomaduro)
+This will write `literal-export.json`, with a single array of book objects:
 
-## License
-
-Laravel Zero is an open-source software licensed under the MIT license.
+```json
+[
+  {
+    "title": "No Time to Spare",
+    "subtitle": "Thinking about what Matters",
+    "isbn10": "1328661598",
+    "isbn13": "9781328661593",
+    "publisher": null,
+    "publishedDate": null,
+    "authors":
+    [
+      "Ursula K. Le Guin"
+    ],
+    "pageCount": 240,
+    "readingState": "FINISHED",
+    "started": "2024-09-04",
+    "finished": "2024-09-15"
+  }
+]
+```
