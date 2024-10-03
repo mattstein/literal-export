@@ -1,6 +1,6 @@
 # Literal Export CLI Utility
 
-This uses the [Literal](https://literal.club) [GraphQL API](https://literal.club/pages/api) to export more details than the account CSV.
+This uses the [Literal](https://literal.club) [GraphQL API](https://literal.club/pages/api) to write your bookshelf items to a JSON file, and include reading start and end dates that aren’t included in the CSV export.
 
 It prompts for your account email address and password in order to get a GraphQL token and make subsequent queries. (These credentials are not stored!)
 
