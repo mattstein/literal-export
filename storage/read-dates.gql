@@ -1,0 +1,6 @@
+query getReadDates($bookId: String!, $profileId: String!) {
+  getReadDates(bookId: $bookId, profileId: $profileId) {
+    started
+    finished
+  }
+}

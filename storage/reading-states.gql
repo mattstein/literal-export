@@ -1,0 +1,6 @@
+query myReadingStates {
+  myReadingStates {
+    bookId
+    status
+  }
+}

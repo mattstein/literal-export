@@ -1,0 +1,22 @@
+query myBooks {
+  myBooks(limit: 200, offset: 0) {
+    ...BookParts
+  }
+}
+
+fragment BookParts on Book {
+  id
+  slug
+  title
+  subtitle
+  description
+  isbn10
+  isbn13
+  pageCount
+  publishedDate
+  publisher
+  cover
+  authors {
+    name
+  }
+}
